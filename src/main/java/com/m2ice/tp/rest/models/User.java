@@ -1,5 +1,8 @@
 package com.m2ice.tp.rest.models;
 
+import com.m2ice.tp.rest.utils.XMLFinder;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class User {
@@ -8,10 +11,16 @@ public class User {
     private String name;
     private List<Service> services;
 
-    public User(int id, String name, List<Service> services) {
+    public User(int id, String name) {
         this.id = id;
         this.name = name;
-        this.services = services;
+        this.services = new ArrayList<>();
+    }
+
+    public User(String xml) {
+        this.id = -1;
+        this.name = XMLFinder.findAttribute(xml, "name");
+        this.services = new ArrayList<>();
     }
 
     public int getId() {
@@ -39,6 +48,9 @@ public class User {
     }
 
     public String toXML() {
-        return "<USER id=\"" + id + "\" name=\"" + name + "\" ></USER>";
+        return "<user id=\"" + id + "\" name=\"" + name + "\" ></user>";
     }
+
+
+
 }
